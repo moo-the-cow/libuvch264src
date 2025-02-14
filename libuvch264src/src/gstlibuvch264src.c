@@ -441,7 +441,7 @@ static void gst_libuvc_h264_src_dispose (GObject * object)
 {
   GstLibuvcH264Src *self = GST_LIBUVC_H264_SRC (object);
 
-  if (self->usb_ctx)
+  if (self->uvc_ctx)
     libusb_exit (self->uvc_ctx);
   self->uvc_ctx = NULL;
   g_free (self->uvc_devh);
