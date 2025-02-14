@@ -449,7 +449,7 @@ static void gst_libuvc_h264_src_dispose (GObject * object)
   g_free (self->uvc_dev);
   self->uvc_dev = NULL;
 
-  G_OBJECT_CLASS (gobject_class)->dispose (object);
+  G_OBJECT_CLASS (gst_libuvc_h264_src_parent_class)->dispose (object);
 }
 
 // Callback to handle frame data
