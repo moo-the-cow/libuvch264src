@@ -23,6 +23,7 @@ G_DECLARE_FINAL_TYPE(GstLibuvcH264Src, gst_libuvc_h264_src, GST, LIBUVC_H264_SRC
 struct _GstLibuvcH264Src {
   GstPushSrc parent_instance;
   gchar* index;
+  libusb_context *usb_ctx;
   uvc_context_t *uvc_ctx;
   uvc_device_t *uvc_dev;
   uvc_device_handle_t *uvc_devh;
