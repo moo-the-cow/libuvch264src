@@ -49,7 +49,7 @@ static void gst_libuvc_h264_src_class_init(GstLibuvcH264SrcClass *klass) {
   GstPushSrcClass *push_src_class = GST_PUSH_SRC_CLASS(klass);
 
   base_src_class->negotiate = GST_DEBUG_FUNCPTR(gst_libuvc_h264_negotiate);
-  gobject_class->dispose = gst_uvc_h264_src_dispose; //added by moo-the-cow
+  gobject_class->dispose = gst_libuvc_h264_src_dispose; //added by moo-the-cow
   gobject_class->set_property = gst_libuvc_h264_src_set_property;
   gobject_class->get_property = gst_libuvc_h264_src_get_property;
 
