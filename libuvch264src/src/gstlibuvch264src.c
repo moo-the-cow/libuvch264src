@@ -38,6 +38,7 @@ static void gst_libuvc_h264_src_get_property(GObject *object, guint prop_id,
                                              GValue *value, GParamSpec *pspec);
 static gboolean gst_libuvc_h264_src_start(GstBaseSrc *src);
 static gboolean gst_libuvc_h264_src_stop(GstBaseSrc *src);
+static void gst_libuvc_h264_src_dispose (GObject * object); //added by moo-the-cow
 static GstFlowReturn gst_libuvc_h264_src_create(GstPushSrc *src, GstBuffer **buf);
 static void gst_libuvc_h264_src_finalize(GObject *object);
 
@@ -48,6 +49,7 @@ static void gst_libuvc_h264_src_class_init(GstLibuvcH264SrcClass *klass) {
   GstPushSrcClass *push_src_class = GST_PUSH_SRC_CLASS(klass);
 
   base_src_class->negotiate = GST_DEBUG_FUNCPTR(gst_libuvc_h264_negotiate);
+  gobject_class->dispose = gst_uvc_h264_src_dispose; //added by moo-the-cow
   gobject_class->set_property = gst_libuvc_h264_src_set_property;
   gobject_class->get_property = gst_libuvc_h264_src_get_property;
 
@@ -433,6 +435,23 @@ static gboolean gst_libuvc_h264_src_stop(GstBaseSrc *src) {
   }
 
   return TRUE;
+}
+
+static void gst_libuvc_h264_src_dispose (GObject * object)
+{
+  GstUvcH264Src *self = GST_UVC_H264_SRC (object);
+
+  if (self->usb_ctx)
+    libusb_exit (self->usb_ctx);
+  self->usb_ctx = NULL;
+  g_free (self->jpeg_decoder_name);
+  self->jpeg_decoder_name = NULL;
+  g_free (self->colorspace_name);
+  self->colorspace_name = NULL;
+  g_free (self->device);
+  self->device = NULL;
+
+  G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
 // Callback to handle frame data
