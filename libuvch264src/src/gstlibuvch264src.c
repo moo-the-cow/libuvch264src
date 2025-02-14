@@ -444,12 +444,12 @@ static void gst_libuvc_h264_src_dispose (GObject * object)
   if (self->usb_ctx)
     libusb_exit (self->uvc_ctx);
   self->uvc_ctx = NULL;
-  g_free (self->uvc_hdev);
-  self->uvc_dev = NULL;
-  g_free (self->uvc_hdev);
+  g_free (self->uvc_devh);
+  self->uvc_devh = NULL;
+  g_free (self->uvc_dev);
   self->uvc_dev = NULL;
 
-  G_OBJECT_CLASS (parent_class)->dispose (object);
+  G_OBJECT_CLASS (gobject_class)->dispose (object);
 }
 
 // Callback to handle frame data
