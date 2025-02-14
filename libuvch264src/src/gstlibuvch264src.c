@@ -439,7 +439,7 @@ static gboolean gst_libuvc_h264_src_stop(GstBaseSrc *src) {
 
 static void gst_libuvc_h264_src_dispose (GObject * object)
 {
-  GstUvcH264Src *self = GST_UVC_H264_SRC (object);
+  GstUvcH264Src *self = GST_LIBUVC_H264_SRC (object);
 
   if (self->usb_ctx)
     libusb_exit (self->usb_ctx);
