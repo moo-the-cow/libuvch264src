@@ -13,6 +13,7 @@ gst-launch-1.0 libuvch264src index=0 ! video/x-h264,width=1920,height=1080,frame
 
 ## Build Steps
 
+```
 sudo apt install build-essential cmake git meson pkg-config
 sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 sudo apt install libusb-1.0-0 libusb-1.0-0-dev
@@ -30,5 +31,4 @@ meson compile
 meson install
 
 sudo mv /usr/local/lib/aarch64-linux-gnu/gstreamer-1.0/libgstlibuvch264src.so /lib/aarch64-linux-gnu/gstreamer-1.0/
-sudo cp /usr/local/lib/libuvc.* /usr/lib/aarch64-linux-gnu/
-
+sudo cp /usr/local/lib/libuvc.* /usr/lib/aarch64-linux-gnu/```
