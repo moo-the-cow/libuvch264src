@@ -8,6 +8,11 @@
 #include <glib.h>
 #include "gstlibuvch264src.h"
 
+/* --- ensure UVC_FRAME_FORMAT_H265 is defined (may be missing in older libuvc) --- */
+#ifndef UVC_FRAME_FORMAT_H265
+#define UVC_FRAME_FORMAT_H265 4
+#endif
+
 GST_DEBUG_CATEGORY_STATIC(gst_libuvc_h264_src_debug);
 #define GST_CAT_DEFAULT gst_libuvc_h264_src_debug
 
@@ -344,11 +349,11 @@ static gpointer gst_libuvc_h264_src_control_thread(gpointer data) {
         GST_INFO_OBJECT(self, "Received control command: %s", buffer);
         char *response = gst_libuvc_h264_src_process_control_command(self, buffer);
         if (response) {
-          write(client_fd, response, strlen(response));
+          (void)write(client_fd, response, strlen(response));
           g_free(response);
         } else {
           const char *default_response = "OK";
-          write(client_fd, default_response, strlen(default_response));
+          (void)write(client_fd, default_response, strlen(default_response));
         }
       }
       close(client_fd);
@@ -947,5 +952,5 @@ GST_PLUGIN_DEFINE(
     VERSION,
     "LGPL",
     "GStreamer",
-    "https://gstreamer.freedesktop.org/"
+    "https://gstreamer.freedesktop.org"
 )
